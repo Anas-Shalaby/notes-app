@@ -7,6 +7,9 @@ import config from "./config";
 import { Amplify } from "aws-amplify";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { initSentry } from "./lib/errorLib";
+
+initSentry();
 
 Amplify.configure({
   Auth: {
