@@ -1,9 +1,14 @@
-import { FrontendStack } from "./FrontendStack";
-import { AuthStack } from "./AuthStack";
-import { StorageStack } from "./StorageStack";
+import { StorageStack } from "./StorageStack.js";
 import { ApiStack } from "./ApiStack";
+import { AuthStack } from "./AuthStack";
+import { FrontendStack } from "./FrontendStack";
 
-export default function main(app) {
+import { App } from "@serverless-stack/resources";
+
+/**
+ * @param {App} app
+ */
+export default function (app) {
   app.setDefaultFunctionProps({
     runtime: "nodejs16.x",
     srcPath: "services",
