@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { BsPencilSquare } from "react-icons/bs";
-import { LinkContainer } from "react-router-bootstrap";
 import { useAppContext } from "../lib/contextLib";
 import { onError } from "../lib/errorLib";
-import { API } from "aws-amplify";
 import "./Home.css";
+import { API } from "aws-amplify";
+import { BsPencilSquare } from "react-icons/bs";
+import { LinkContainer } from "react-router-bootstrap";
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     async function onLoad() {
       if (!isAuthenticated) {

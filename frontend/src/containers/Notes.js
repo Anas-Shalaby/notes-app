@@ -1,21 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API, Storage } from "aws-amplify";
+import { onError } from "../lib/errorLib";
 import Form from "react-bootstrap/Form";
-import { s3Upload } from "../lib/awsLib";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./Notes.css";
-import { onError } from "../lib/errorLib";
+import { s3Upload } from "../lib/awsLib";
 
 export default function Notes() {
   const file = useRef(null);
   const { id } = useParams();
   const nav = useNavigate();
   const [note, setNote] = useState(null);
+  const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [content, setContent] = useState("");
 
   useEffect(() => {
     function loadNote() {
@@ -91,10 +91,6 @@ export default function Notes() {
     }
   }
 
-  function deleteNote() {
-    return API.del("notes", `/notes/${id}`);
-  }
-
   async function handleDelete(event) {
     event.preventDefault();
 
@@ -107,14 +103,6 @@ export default function Notes() {
     }
 
     setIsDeleting(true);
-
-    try {
-      await deleteNote();
-      nav("/");
-    } catch (e) {
-      onError(e);
-      setIsDeleting(false);
-    }
   }
 
   return (

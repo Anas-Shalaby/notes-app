@@ -2,11 +2,11 @@ import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
-import { s3Upload } from "../lib/awsLib";
 import { onError } from "../lib/errorLib";
-import { API } from "aws-amplify";
 import config from "../config";
 import "./NewNote.css";
+import { API } from "aws-amplify";
+import { s3Upload } from "../lib/awsLib";
 
 export default function NewNote() {
   const file = useRef(null);
