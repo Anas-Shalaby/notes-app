@@ -3,10 +3,10 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../lib/contextLib";
+import { Auth } from "aws-amplify";
 import { useFormFields } from "../lib/hooksLib";
 import { onError } from "../lib/errorLib";
 import "./Signup.css";
-import { Auth } from "aws-amplify";
 
 export default function Signup() {
   const [fields, handleFieldChange] = useFormFields({
@@ -60,6 +60,11 @@ export default function Signup() {
       onError(e);
       setIsLoading(false);
     }
+  }
+
+  async function handleConfirmationSubmit(event) {
+    event.preventDefault();
+    setIsLoading(true);
   }
 
   function renderConfirmationForm() {
